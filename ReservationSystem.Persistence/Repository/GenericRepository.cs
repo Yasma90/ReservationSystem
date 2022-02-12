@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using ReservationSystem.Persistence;
-using ReservationSystem.Persistence.Repository.Interface;
+using ReservationSystem.Persistence.Repository.Interfaces;
 
 namespace ReservationSystem.Persistence.Repository
 {
@@ -29,12 +29,14 @@ namespace ReservationSystem.Persistence.Repository
 
         public async Task<List<TEntity>> GetAsync(Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
-            string includeProperties = "")
+            string includeProperties = "", int? page = null, int? pageSize = null)
         {
             IQueryable<TEntity> query = _dbSet;
 
             if (filter != null)
+            {
                 query = query.Where(filter);
+            }
 
             foreach (var includeProperty in includeProperties.Split
                 (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
@@ -42,7 +44,17 @@ namespace ReservationSystem.Persistence.Repository
                 query = query.Include(includeProperty);
             }
 
-            return orderBy != null ? await orderBy(query).ToListAsync() : await query.ToListAsync();
+            if (orderBy != null)
+            {
+                query = (IQueryable<TEntity>)orderBy(query).ToListAsync();
+            }
+
+            if (page != null && pageSize != null)
+            {
+                query = query.Skip((page.Value - 1) * pageSize.Value).Take(pageSize.Value);
+            }
+
+            return await query.ToListAsync();
         }
 
         public async Task<TEntity> AddAsync(TEntity entity)

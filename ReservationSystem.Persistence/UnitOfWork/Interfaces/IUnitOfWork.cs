@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using ReservationSystem.Persistence.Repository.Interface;
+using ReservationSystem.Persistence.Repository.Interfaces;
 
 namespace ReservationSystem.Persistence.UnitOfWork.Interfaces
 {
@@ -8,6 +8,8 @@ namespace ReservationSystem.Persistence.UnitOfWork.Interfaces
     {
         IContactRespository ContactRepository { get; set; }
         IReservationRepository ReservationRepository { get; set; }
+        IContactTypeRepository ContactTypeRepository { get; set; }
+
         Task<int> SaveChangesAsync();
     }
 }

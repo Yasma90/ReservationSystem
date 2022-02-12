@@ -4,6 +4,15 @@ Reservation System development with ASP .Net 5 Web Application (backend) and Ang
 
 To get more details go the API documentation /swagger 
 
+## Pre-requisites
+
+* .Net 5 Framework
+* Visula Studio 2019
+* Angular Cli 13.0.4
+* npm 8.4.1
+* node 16.3.0
+
+
 ## Solution Structure
 
 * ReservationSystem.Application -> backend and front-end, Presentation Layer

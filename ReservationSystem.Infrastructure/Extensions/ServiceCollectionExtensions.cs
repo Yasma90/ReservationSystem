@@ -10,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using ReservationSystem.Persistence;
 using ReservationSystem.Persistence.Repository;
 using ReservationSystem.Persistence.UnitOfWork;
-using ReservationSystem.Persistence.Repository.Interface;
+using ReservationSystem.Persistence.Repository.Interfaces;
 using ReservationSystem.Persistence.UnitOfWork.Interfaces;
 
 namespace ReservationSystem.Infrastructure.Extensions
@@ -23,10 +23,11 @@ namespace ReservationSystem.Infrastructure.Extensions
                 .UseSqlServer(connectionString, sql => sql.MigrationsAssembly(typeof(ReservationSysDbContext)
                     .GetTypeInfo().Assembly.GetName().Name))
                 .UseLoggerFactory(LoggerFactory.Create(builder => builder.AddConsole()))
-                .EnableSensitiveDataLogging());
-            services.AddTransient<IContactRespository, ContactRespository>();
-            services.AddTransient<IReservationRepository, ReservationRepository>();
-            services.AddTransient<IUnitOfWork, UnitOfWork>();
+                .EnableSensitiveDataLogging()); 
+            services.AddScoped<IContactTypeRepository, ContactTypeRepository>();
+            services.AddScoped<IContactRespository, ContactRespository>();
+            services.AddScoped<IReservationRepository, ReservationRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             return services;
         }

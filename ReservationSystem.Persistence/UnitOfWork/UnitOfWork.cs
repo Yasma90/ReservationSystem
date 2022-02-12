@@ -4,7 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using ReservationSystem.Persistence;
-using ReservationSystem.Persistence.Repository.Interface;
+using ReservationSystem.Persistence.Repository.Interfaces;
 using ReservationSystem.Persistence.UnitOfWork.Interfaces;
 
 namespace ReservationSystem.Persistence.UnitOfWork
@@ -15,14 +15,17 @@ namespace ReservationSystem.Persistence.UnitOfWork
         private readonly ReservationSysDbContext _context;
         public IContactRespository ContactRepository { get; set; }
         public IReservationRepository ReservationRepository { get; set; }
+        public IContactTypeRepository ContactTypeRepository { get; set; }
 
-        public UnitOfWork(ReservationSysDbContext context, 
-            IContactRespository contactRepository, 
-            IReservationRepository reservationRepository)
+        public UnitOfWork(ReservationSysDbContext context,
+            IContactRespository contactRepository,
+            IReservationRepository reservationRepository,
+            IContactTypeRepository contactTypeRepository)
         {
             _context = context;
             ContactRepository = contactRepository;
             ReservationRepository = reservationRepository;
+            ContactTypeRepository = contactTypeRepository;
         }
 
         public async Task<int> SaveChangesAsync() => await _context.SaveChangesAsync();

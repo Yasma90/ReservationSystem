@@ -46,11 +46,10 @@ namespace ReservationSystem.Application.Controllers
         }
 
         // PUT: api/Reservations/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutReservation(Guid id, Reservation reservation)
         {
-            if (!ModelState.IsValid || id != reservation.Id)
+            if (id != reservation.Id)
             {
                 return BadRequest();
             }
@@ -78,14 +77,9 @@ namespace ReservationSystem.Application.Controllers
         }
 
         // POST: api/Reservations
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Reservation>> PostReservation(Reservation reservation)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
             await _unitOfWork.ReservationRepository.AddAsync(reservation);
             await _unitOfWork.SaveChangesAsync();
 

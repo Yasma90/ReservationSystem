@@ -2,7 +2,7 @@
 
 namespace ReservationSystem.Persistence.Repository.Interfaces
 {
-    public interface IReservationRepository : IGenericRepository<Reservation>
+    public interface IContactTypeRepository: IGenericRepository<ContactType>
     {
     }
 }

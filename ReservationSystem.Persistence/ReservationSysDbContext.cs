@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using ReservationSystem.Domain.Models;
 
 namespace ReservationSystem.Persistence
@@ -8,6 +7,7 @@ namespace ReservationSystem.Persistence
     {
         public DbSet<Reservation> Reservation { get; set; }
         public DbSet<Contact> Contact { get; set; }
+        public DbSet<ContactType> ContactType { get; set; }
 
         public ReservationSysDbContext(DbContextOptions<ReservationSysDbContext> options)
             : base(options)
@@ -22,6 +22,12 @@ namespace ReservationSystem.Persistence
                 .WithOne(c => c.Contact)
                 .HasForeignKey(fk => fk.ContactId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            // One to many relationship
+            builder.Entity<ContactType>()
+                .HasMany(c => c.Contacts)
+                .WithOne(c => c.ContactType)
+                .HasForeignKey(fk => fk.ContactTypeId);
         }
 
     }

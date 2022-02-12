@@ -46,11 +46,10 @@ namespace ReservationSystem.Application.Controllers
         }
 
         // PUT: api/Contacts/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutContact(Guid id, Contact contact)
         {
-            if (!ModelState.IsValid || id != contact.Id)
+            if (id != contact.Id)
             {
                 return BadRequest();
             }
@@ -78,14 +77,9 @@ namespace ReservationSystem.Application.Controllers
         }
 
         // POST: api/Contacts
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Contact>> PostContact(Contact contact)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
             await _unitOfWork.ContactRepository.AddAsync(contact);
             await _unitOfWork.SaveChangesAsync();
 

@@ -1,11 +1,5 @@
-﻿using System;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using ReservationSystem.Domain.Models;
-using ReservationSystem.Persistence.Repository.Interface;
-using ReservationSystem.Persistence;
+﻿using ReservationSystem.Domain.Models;
+using ReservationSystem.Persistence.Repository.Interfaces;
 
 namespace ReservationSystem.Persistence.Repository
 {

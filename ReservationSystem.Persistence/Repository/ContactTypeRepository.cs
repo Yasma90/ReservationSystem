@@ -3,9 +3,9 @@ using ReservationSystem.Persistence.Repository.Interfaces;
 
 namespace ReservationSystem.Persistence.Repository
 {
-    public class ReservationRepository : GenericRepository<Reservation>, IReservationRepository
+    public class ContactTypeRepository : GenericRepository<ContactType>, IContactTypeRepository
     {
-        public ReservationRepository(ReservationSysDbContext context) : base(context)
+        public ContactTypeRepository(ReservationSysDbContext context) : base(context)
         {
         }
     }
