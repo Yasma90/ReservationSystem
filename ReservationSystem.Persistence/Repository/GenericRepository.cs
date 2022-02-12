@@ -1,15 +1,17 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
+﻿using System;
 using System.Text;
+using System.Linq;
 using System.Threading.Tasks;
+using System.Linq.Expressions;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
+using ReservationSystem.Persistence;
+using ReservationSystem.Persistence.Repository.Interface;
 
 namespace ReservationSystem.Persistence.Repository
 {
     public abstract class GenericRepository<TEntity> : IGenericRepository<TEntity>, IDisposable
-       where TEntity : class
+        where TEntity : class
     {
         private readonly ReservationSysDbContext _context;
         private readonly DbSet<TEntity> _dbSet;
@@ -81,6 +83,8 @@ namespace ReservationSystem.Persistence.Repository
             _dbSet.RemoveRange(entities);
             return entities;
         }
+
+        public bool Exists(object id) => GetbyIdAsync(id) != null;
 
         #region Dispose
 

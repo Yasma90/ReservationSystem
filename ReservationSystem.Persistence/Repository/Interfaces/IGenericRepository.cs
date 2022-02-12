@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace ReservationSystem.Persistence.Repository
+namespace ReservationSystem.Persistence.Repository.Interface
 {
     public interface IGenericRepository<TEntity> where TEntity : class
     {
@@ -17,5 +17,6 @@ namespace ReservationSystem.Persistence.Repository
         IEnumerable<TEntity> UpdateRange(IEnumerable<TEntity> entities);
         Task<TEntity> DeleteAsync(object id);
         IEnumerable<TEntity> DeleteRange(IEnumerable<TEntity> entities);
+        bool Exists(object id);
     }
 }

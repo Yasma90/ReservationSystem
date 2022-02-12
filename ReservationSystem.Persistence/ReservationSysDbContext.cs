@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
 using ReservationSystem.Domain.Models;
-using System;
 
 namespace ReservationSystem.Persistence
 {
@@ -22,10 +22,7 @@ namespace ReservationSystem.Persistence
                 .WithOne(c => c.Contact)
                 .HasForeignKey(fk => fk.ContactId)
                 .OnDelete(DeleteBehavior.Cascade);
-                //.WillCascadeOnDelete(false) .MapToStoreProcedure()
-
         }
-
 
     }
 }

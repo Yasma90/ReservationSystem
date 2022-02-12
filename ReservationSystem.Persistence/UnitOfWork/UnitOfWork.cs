@@ -1,24 +1,28 @@
-﻿using ReservationSystem.Persistence.Repository;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using ReservationSystem.Persistence;
+using ReservationSystem.Persistence.Repository.Interface;
+using ReservationSystem.Persistence.UnitOfWork.Interfaces;
 
 namespace ReservationSystem.Persistence.UnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly ReservationSysDbContext _context;
-        public ContactRespository ContactRespository { get; set; }
-        public ReservationRepository ReservationRespository { get; set; }
         private bool _disposed;
+        private readonly ReservationSysDbContext _context;
+        public IContactRespository ContactRepository { get; set; }
+        public IReservationRepository ReservationRepository { get; set; }
 
-        public UnitOfWork(ReservationSysDbContext context, ContactRespository contactRepository, ReservationRepository reservationRepository)
+        public UnitOfWork(ReservationSysDbContext context, 
+            IContactRespository contactRepository, 
+            IReservationRepository reservationRepository)
         {
             _context = context;
-            ContactRespository = contactRepository;
-            ReservationRespository = reservationRepository;
+            ContactRepository = contactRepository;
+            ReservationRepository = reservationRepository;
         }
 
         public async Task<int> SaveChangesAsync() => await _context.SaveChangesAsync();

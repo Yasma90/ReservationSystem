@@ -1,8 +1,8 @@
 ﻿using ReservationSystem.Domain.Models;
 
-namespace ReservationSystem.Persistence.Repository
+namespace ReservationSystem.Persistence.Repository.Interface
 {
-    internal interface IContactRespository : IGenericRepository<Contact>
+    public interface IContactRespository : IGenericRepository<Contact>
     {
     }
 }
