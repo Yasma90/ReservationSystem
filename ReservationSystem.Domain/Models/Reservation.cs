@@ -18,7 +18,6 @@ namespace ReservationSystem.Domain.Models
         public int Ranking { get; set; }
         public bool Favorite { get; set; }
         public string Description { get; set; }
-        [ForeignKey("ContactId")]
         public Guid ContactId { get; set; }
         public virtual Contact Contact { get; set; }
     }

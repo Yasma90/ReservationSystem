@@ -23,22 +23,31 @@ namespace ReservationSystem.Application
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddInfrastructure(Configuration.GetConnectionString("DbConnectionStr"));
-            services.AddControllersWithViews();
+            //Prevent loops in navigation properties
+            services.AddControllersWithViews()
+                .AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
-            }); 
+            });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ReservationSystem.Application", Version = "v1" });
             });
+
+            if (Configuration["SeedData"] == "true")
+                services.AddDbInitializer();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            if (Configuration["SeedData"] == "true")
+                app.AddConfigureSeedData();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

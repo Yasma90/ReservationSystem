@@ -10,8 +10,8 @@ using ReservationSystem.Persistence;
 namespace ReservationSystem.Persistence.Migrations
 {
     [DbContext(typeof(ReservationSysDbContext))]
-    [Migration("20220212115907_Added_Table_Type")]
-    partial class Added_Table_Type
+    [Migration("20220213211711_AddDbContactType")]
+    partial class AddDbContactType
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

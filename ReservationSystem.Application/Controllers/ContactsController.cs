@@ -45,6 +45,21 @@ namespace ReservationSystem.Application.Controllers
             return contact;
         }
 
+        // GET: api/Contacts/Name
+        [HttpGet("{name}")]
+        public async Task<ActionResult<Contact>> GetContactbyName(string name)
+        {
+            var contact = await _unitOfWork.ContactRepository.GetAsync(x => x.Name == name);
+
+            if (contact == null)
+            {
+                _logger.LogDebug($"Don't found the contact with name: {name}.");
+                return NotFound();
+            }
+
+            return contact.FirstOrDefault();
+        }
+
         // PUT: api/Contacts/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutContact(Guid id, Contact contact)

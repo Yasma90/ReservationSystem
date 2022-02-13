@@ -20,9 +20,8 @@ namespace ReservationSystem.Domain.Models
         public string PhoneNumber { get; set; }
         [Required]
         public DateTime BirthDate { get; set; }
-        [ForeignKey("ContactTypeId")]
-        public Guid ContactTypeId { get; set; }
         [Required]
+        public Guid ContactTypeId { get; set; }        
         public virtual ContactType ContactType { get; set; }
         public virtual ICollection<Reservation> Reservations { get; set; }
 

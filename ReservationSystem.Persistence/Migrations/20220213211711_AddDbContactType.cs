@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ReservationSystem.Persistence.Migrations
 {
-    public partial class Added_Table_Type : Migration
+    public partial class AddDbContactType : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

@@ -4,10 +4,12 @@ Reservation System development with ASP .Net 5 Web Application (backend) and Ang
 
 To get more details go the API documentation /swagger 
 
-## Pre-requisites
-
-* .Net 5 Framework
-* Visula Studio 2019
+## Pre-requisites 
+            
+* Target framework: .Net Core 5 
+* EF Core version: 5.0.14
+* IDE: Visula Studio 2019
+* Database provider: Microsoft.EntityFrameworkCore.SqlServer
 * Angular Cli 13.0.4
 * npm 8.4.1
 * node 16.3.0

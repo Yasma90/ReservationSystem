@@ -32,5 +32,8 @@ namespace ReservationSystem.Infrastructure.Extensions
             return services;
         }
 
+        public static IServiceCollection AddDbInitializer(this IServiceCollection services) =>
+            services.AddScoped<IDbInitializer, DbInitializer>();
+
     }
 }

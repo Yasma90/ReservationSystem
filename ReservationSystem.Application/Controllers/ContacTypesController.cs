@@ -32,7 +32,7 @@ namespace ReservationSystem.Application.Controllers
 
         // GET: api/ContactTypes/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<ContactType>> GetContactType(Guid id)
+        public async Task<ActionResult<ContactType>> GetContactType(int id)
         {
             var contactType = await _unitOfWork.ContactTypeRepository.GetbyIdAsync(id);
 

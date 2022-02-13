@@ -13,6 +13,6 @@ namespace ReservationSystem.Domain.Models
         public Guid Id { get; set; }
         [Required]
         public string Name { get; set; }
-        public ICollection<Contact> Contacts { get; set; }
+        public virtual ICollection<Contact> Contacts { get; set; }
     }
 }
