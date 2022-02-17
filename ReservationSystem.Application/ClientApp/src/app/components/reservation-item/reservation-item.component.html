@@ -13,17 +13,10 @@
   <td>
     <div mat-card-title><p>Add Favorite</p></div>
     <div mat-card-subtitle><span name="favorite">{{reservation.favorite}}</span></div>
-    <button mat-icon-button color="warn" aria-label="Example icon button with a heart icon">
-      <mat-icon>favorite</mat-icon>
+    <button mat-button-icon (click)="setFavorite()">
+      <mat-icon>home</mat-icon>
     </button>
-    <button mat-raised-button color="accent">
-      <mat-icon>mic</mat-icon>
-      Start Recording
-  </button>
-  <button mat-button>
-    <mat-icon>mic</mat-icon>
-    Start Recording
-</button>
+    <mat-icon class="mat-icon-rtl-mirror" svgIcon="thumb-up"></mat-icon>
   </td>
   <td>
     <button mat-button class="btn btn-gray" color="secundary" (click)="editReservation(reservation)">EDIT</button>
