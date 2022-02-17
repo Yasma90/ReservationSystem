@@ -1,4 +1,4 @@
 export class ContactType {
-  id:string;
+  id?:string;
   name:string;
 }

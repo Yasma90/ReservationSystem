@@ -1,5 +1,6 @@
 import { Input } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
+import { errorsResponseApi } from 'src/app/helpers/utilities/utilities';
 import { Reservation } from 'src/app/models/reservation';
 import { ReservationService } from 'src/app/services/reservation.service';
 
@@ -10,6 +11,7 @@ import { ReservationService } from 'src/app/services/reservation.service';
 })
 export class ReservationItemComponent implements OnInit {
 
+  //@Input() errors: string[] = [];
   @Input() reservation: Reservation;
   isFavorite: boolean;
 
@@ -18,16 +20,17 @@ export class ReservationItemComponent implements OnInit {
     /*private toastr:ToastrService*/) { }
 
   ngOnInit(): void {
-    this.isFavorite=this.reservation.favorite;
-  }
-
-  editReservation(reservation: Reservation){
-    this.service.putReservation(reservation)
-    .subscribe(()=>{},err=> console.error(err));
+    this.isFavorite = this.reservation.favorite;
   }
 
   setFavorite(){
     this.reservation.favorite = !this.reservation.favorite;
     this.editReservation(this.reservation);
   }
+
+  editReservation(reservation: Reservation){
+    this.service.putReservation(reservation)
+    .subscribe(() => {}, err => console.error(err));
+  }
+
 }

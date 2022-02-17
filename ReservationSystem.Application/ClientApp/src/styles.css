@@ -40,7 +40,7 @@ footer{
 .container{
   display: block;
   grid-template-columns: fit-content(300px) 1fr fit-content(300px);
-  max-width: 45%;
+  max-width: 50%;
   margin: auto;
   background-color: white;
 }
@@ -62,5 +62,11 @@ footer{
   border: 0;
   padding: 0px 20px;
   cursor: pointer;
+}
+
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 

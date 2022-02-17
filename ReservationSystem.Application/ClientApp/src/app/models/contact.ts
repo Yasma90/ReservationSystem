@@ -1,7 +1,7 @@
 import { ContactType } from "./contact-type";
 
 export class Contact {
-  id: string;
+  id?: string;
   name: string;
   phone: string;
   birthDate: string;

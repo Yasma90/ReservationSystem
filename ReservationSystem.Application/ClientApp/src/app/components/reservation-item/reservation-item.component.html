@@ -13,12 +13,12 @@
   <td>
     <div mat-card-title><p>Add Favorite</p></div>
     <div mat-card-subtitle><span name="favorite">{{reservation.favorite}}</span></div>
-    <button mat-button-icon (click)="setFavorite()">
-      <mat-icon>home</mat-icon>
+    <button mat-icon-button color="warn" aria-label="" (click)="setFavorite()">
+      <mat-icon>{{reservation.favorite ? 'favorite': 'favorite_border' }}</mat-icon>
     </button>
-    <mat-icon class="mat-icon-rtl-mirror" svgIcon="thumb-up"></mat-icon>
   </td>
   <td>
-    <button mat-button class="btn btn-gray" color="secundary" (click)="editReservation(reservation)">EDIT</button>
+    <button mat-button class="btn btn-gray" color="secundary"
+    [routerLink]="['../reservations/edit',reservation.id]">EDIT</button>
   </td>
 </tr>

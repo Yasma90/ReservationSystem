@@ -16,6 +16,7 @@ import { ContactItemComponent } from './components/contact-item/contact-item.com
 import { ReservationItemComponent } from './components/reservation-item/reservation-item.component';
 import { BannerPageComponent } from './components/banner-page/banner-page.component';
 import { ContactFormComponent } from './components/contact-form/contact-form.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,11 @@ import { ContactFormComponent } from './components/contact-form/contact-form.com
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    ToastrModule.forRoot(/*{
+      timeOut: 10000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+    }*/), // ToastrModule added
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,

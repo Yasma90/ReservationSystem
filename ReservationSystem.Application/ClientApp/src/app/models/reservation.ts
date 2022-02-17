@@ -1,7 +1,7 @@
 import { Contact } from "./contact";
 
 export class Reservation {
-  id:string;
+  id?:string;
   description: string;
   ranking: number;
   favorite: boolean;
