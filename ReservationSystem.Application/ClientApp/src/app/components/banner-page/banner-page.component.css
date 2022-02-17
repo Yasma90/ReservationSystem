@@ -1,0 +1,28 @@
+.banner{
+  background-image: url("../../../../../wwwroot/banner.jpg");
+  background-size: cover;
+  height: 130px;
+}
+
+#banner-container{
+  display: flex;
+  color: white;
+  background-color: transparent;
+  height: 100%;
+  position: relative;
+  /*background-image: url("../../../../../wwwroot/company.png");*/
+}
+
+.banner-description{
+  flex-grow: 1;
+  font-size: 20px;
+  margin: auto;
+  white-space: pre-wrap;
+}
+
+.banner-name{
+  flex-grow: 0.1;
+  font-size: 60px;
+  margin: auto;
+}
+

@@ -1,0 +1,35 @@
+.reservation-card {
+  max-width: 400px;
+}
+
+.card-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+
+tr{
+  /**/
+  display: table-row;
+  vertical-align: inherit;
+  border-color: inherit;
+}
+
+td{
+  width: 30%;
+}
+.row{
+  background-color: lightgray;
+  margin: 5px 0 5px 0;
+  display: flex;/**/
+}
+
+.example-button-container {
+  display: flex;
+  justify-content: center;
+  width: 120px;
+}
+
+
+
+
+

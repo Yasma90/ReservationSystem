@@ -23,6 +23,12 @@ To get more details go the API documentation /swagger
 * ReservationSystem.Persistence ->  Persistence, Data Access Layer
 
 
+## Setting Api URL into front-end
+
+`---src/enviroments/enviroment|.production|.ts`
+`apiUrl: 'https://localhost:5001/api' //'https://localhost:44323/api'`
+
+
 ## Further help
 
 `Add Migrations`

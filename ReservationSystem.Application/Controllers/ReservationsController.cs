@@ -28,13 +28,14 @@ namespace ReservationSystem.Application.Controllers
         // GET: api/Reservations
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Reservation>>> GetReservation() => 
-            await _unitOfWork.ReservationRepository.GetAllAsync();
+            await _unitOfWork.ReservationRepository.GetAsync(includeProperties: "Contact");
 
         // GET: api/Reservations/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Reservation>> GetReservation(Guid id)
         {
-            var reservation = await _unitOfWork.ReservationRepository.GetbyIdAsync(id);
+            var reservation = await _unitOfWork.ReservationRepository.GetAsync(res => res.Id == id, 
+                                                                         includeProperties: "Contact");
 
             if (reservation == null)
             {
@@ -42,7 +43,7 @@ namespace ReservationSystem.Application.Controllers
                 return NotFound();
             }
 
-            return reservation;
+            return reservation.FirstOrDefault();
         }
 
         // PUT: api/Reservations/5

@@ -1,32 +1,45 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
-
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MaterialModule } from './material/material.module';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReservationListComponent } from './components/reservation-list/reservation-list.component';
+import { ReservationCreateComponent } from './components/reservation-create/reservation-create.component';
+import { ErrorResponseComponent } from './helpers/error-response/error-response.component';
+import { ContactCreateComponent } from './components/contact-create/contact-create.component';
+import { HeaderPageComponent } from './components/header-page/header-page.component';
+import { ContactItemComponent } from './components/contact-item/contact-item.component';
+import { ReservationItemComponent } from './components/reservation-item/reservation-item.component';
+import { BannerPageComponent } from './components/banner-page/banner-page.component';
+import { ContactFormComponent } from './components/contact-form/contact-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavMenuComponent,
-    HomeComponent,
-    CounterComponent,
-    FetchDataComponent
+    ReservationListComponent,
+    ReservationCreateComponent,
+    ErrorResponseComponent,
+    ContactCreateComponent,
+    HeaderPageComponent,
+    ContactItemComponent,
+    ReservationItemComponent,
+    BannerPageComponent,
+    ContactFormComponent
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
-    ])
+    ReactiveFormsModule,
+    MaterialModule,
+    //ToastrModule.forRoot(),
+    //ToastContainerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -31,6 +31,7 @@ namespace ReservationSystem.Persistence
                 .HasForeignKey(fk => fk.ContactTypeId)
                 .HasPrincipalKey(pk => new { pk.Id })
                 .OnDelete(DeleteBehavior.Cascade);
+
         }
 
     }

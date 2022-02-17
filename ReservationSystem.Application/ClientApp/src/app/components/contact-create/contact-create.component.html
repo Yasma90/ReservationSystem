@@ -1,0 +1,20 @@
+<form [formGroup]="form">
+  <mat-form-field appearence="outline">
+    <mat-label>Name</mat-label>
+    <input formControlName="name" matInput/>
+    <mat-error></mat-error>
+  </mat-form-field>
+  <mat-form-field appearence="full">
+    <mat-label>Birth Date</mat-label>
+    <input formControlName="birthDate" matInput [matDatepicker]="birthDate" max="{{now | date:'yyyy-MM-dd'}}"/>
+    <mat-date-picker-toggle matSuffix ></mat-date-picker-toggle>
+    <mat-datepicker #birthDate></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Contact Type</mat-label>
+    <mat-select *ngFor="let type of types" placeholder="">
+      <mat-option [value]="type.id">{{type.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+</form>

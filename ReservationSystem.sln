@@ -5,13 +5,11 @@ VisualStudioVersion = 16.0.31911.196
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReservationSystem.Application", "ReservationSystem.Application\ReservationSystem.Application.csproj", "{F2F8B0E0-D209-4E48-840A-D499D4F81ABD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReservationSystem", "ReservationSystem\ReservationSystem.csproj", "{A847F17E-376E-43F6-A7A9-96BAA323AAAB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReservationSystem.Domain", "ReservationSystem.Domain\ReservationSystem.Domain.csproj", "{5FEEF947-92AE-4D27-A212-A48A8E63EAF8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReservationSystem.Domain", "ReservationSystem.Domain\ReservationSystem.Domain.csproj", "{5FEEF947-92AE-4D27-A212-A48A8E63EAF8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReservationSystem.Infrastructure", "ReservationSystem.Infrastructure\ReservationSystem.Infrastructure.csproj", "{29449724-5C0A-44B0-8F77-6CEDAA6746A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReservationSystem.Infrastructure", "ReservationSystem.Infrastructure\ReservationSystem.Infrastructure.csproj", "{29449724-5C0A-44B0-8F77-6CEDAA6746A7}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReservationSystem.Persistence", "ReservationSystem.Persistence\ReservationSystem.Persistence.csproj", "{C448C39B-FEC7-43F1-916E-5CAF9DE624A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReservationSystem.Persistence", "ReservationSystem.Persistence\ReservationSystem.Persistence.csproj", "{C448C39B-FEC7-43F1-916E-5CAF9DE624A6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +21,6 @@ Global
 		{F2F8B0E0-D209-4E48-840A-D499D4F81ABD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F2F8B0E0-D209-4E48-840A-D499D4F81ABD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F2F8B0E0-D209-4E48-840A-D499D4F81ABD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A847F17E-376E-43F6-A7A9-96BAA323AAAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A847F17E-376E-43F6-A7A9-96BAA323AAAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A847F17E-376E-43F6-A7A9-96BAA323AAAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A847F17E-376E-43F6-A7A9-96BAA323AAAB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5FEEF947-92AE-4D27-A212-A48A8E63EAF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5FEEF947-92AE-4D27-A212-A48A8E63EAF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5FEEF947-92AE-4D27-A212-A48A8E63EAF8}.Release|Any CPU.ActiveCfg = Release|Any CPU

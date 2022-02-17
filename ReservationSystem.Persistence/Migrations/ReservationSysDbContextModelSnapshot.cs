@@ -42,7 +42,8 @@ namespace ReservationSystem.Persistence.Migrations
 
                     b.HasIndex("ContactTypeId");
 
-                    b.HasIndex("Name");
+                    b.HasIndex("Name", "BirthDate")
+                        .IsUnique();
 
                     b.ToTable("Contact");
                 });

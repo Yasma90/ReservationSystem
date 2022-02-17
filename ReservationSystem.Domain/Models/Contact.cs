@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ReservationSystem.Domain.Models
 {
-    [Index(nameof(Name))]
+    [Index(nameof(Name), nameof(BirthDate), IsUnique =true)]
     public class Contact
     {
         [Key]

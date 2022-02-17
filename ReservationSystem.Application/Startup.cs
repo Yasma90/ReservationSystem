@@ -69,12 +69,12 @@ namespace ReservationSystem.Application
             }
 
             app.UseRouting();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
+                //endpoints.MapFallbackToPage("/Index");
             });
 
             app.UseSpa(spa =>
