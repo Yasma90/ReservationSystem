@@ -39,17 +39,12 @@ import { RankingStarComponent } from './components/ranking-star/ranking-star.com
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot(/*{
-      timeOut: 10000,
-      positionClass: 'toast-bottom-right',
-      preventDuplicates: true,
-    }*/), // ToastrModule added
+    ToastrModule.forRoot(),
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
-    //ToastrModule.forRoot(),
-    //ToastContainerModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

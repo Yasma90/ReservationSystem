@@ -22,6 +22,8 @@
     "@angular/platform-browser": "~13.0.0",
     "@angular/platform-browser-dynamic": "~13.0.0",
     "@angular/router": "~13.0.0",
+    "@syncfusion/ej2-angular-richtexteditor": "^19.4.52",
+    "ngx-markdown": "^13.1.0",
     "ngx-toastr": "^14.2.1",
     "rxjs": "~7.4.0",
     "tslib": "^2.3.0",

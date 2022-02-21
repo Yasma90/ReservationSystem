@@ -4,12 +4,12 @@
 <div class="container">
   <app-error-response style="visibility: hidden;" [errors]="errors"></app-error-response>
 
-  <form id="reservation-form" (submit)="onSubmit()" [formGroup]="formGroup">
-    <app-contact-form [contact]="contact" (contactChange)="contactChange($event)"></app-contact-form>
+  <form id="reservation-form" (onSubmit)="onnSubmit()" [formGroup]="formGroup">
+    <app-contact-form ></app-contact-form>
     <input type="hidden" name="id" [value]="id" />
     <mat-form-field appearance="outline">
       <mat-label>Description</mat-label>
-      <textarea matInput formGroupName="description" ></textarea>
+      <textarea formGroupName="description" matInput [value]="reservation.description">{{reservation.description}}</textarea>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Reservation Date</mat-label>

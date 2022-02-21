@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Contact } from 'src/app/models/contact';
@@ -14,12 +14,11 @@ import { ReservationService } from 'src/app/services/reservation.service';
 })
 export class ContactFormComponent implements OnInit {
 
-  @Input()
-    contact!: Contact;
-  form: FormGroup;
   @Output()
     contactChange: EventEmitter<Contact> = new EventEmitter<Contact>();
 
+  form: FormGroup;
+  contact: Contact;
   contactTypes: ContactType[];
   date = new FormControl(new Date());
   maxDate: Date;
@@ -27,42 +26,58 @@ export class ContactFormComponent implements OnInit {
   constructor(
     private contactTypeService: ContactTypeService,
     private formBuilder: FormBuilder,
-    private toast: ToastrService,) {
+    private toast: ToastrService) {
       this.maxDate = new Date();
-    }
+  }
 
     //*OnInit*//
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      id: [null],
+      id: [''],
       name: ['', Validators.required],
       contactTypeId: ['', Validators.required],
       birthDate: ['', Validators.required],
-      phoneNumber: ['', Validators.pattern('^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$')]
+      phoneNumber: ['', { Validators: [
+                  Validators.required,
+                  Validators.pattern('^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$')]
+      }]
     });
-    //if(this.contact?.id)
-    if(this.contact != undefined){
-      //this.form.reset();
-      this.form.patchValue(this.contact);
-      console.log(this.form.value);
-      console.log(`Contact: ${this.contact.id}`);
-    }
     this.getContactTypes();
-    //setTimeout(()=>{
-    //  this.sendContactForm();
-    //},300);
+
+    //if(this.contact?.id)
+    if(this.contact?.id){
+      //this.form.reset();
+      this.setFormGroup(this.contact);
+      //this.form.patchValue(this.contact);
+    }
 
   }
 
   //**Rise the event send the data back to parent*//
   sendContactForm(){
-    this.contactChange.emit(this.form.value);
+    this.parseContact();
+    this.contactChange.emit(this.contact);
   }
 
   //*Services*//
   getContactTypes(){
     this.contactTypeService.getContactTypes()
     .subscribe( resp => this.contactTypes = resp);
+  }
+
+  //**Function Help */
+  parseContact(){
+    this.contact.name = this.form.contains['name'];
+    this.contact.phoneNumber = this.form.contains['phoneNumber'];
+    this.contact.birthDate = this.form.contains['birthDate'];
+    this.contact.contactTypeId = this.form.contains['contactTypeId'];
+  }
+
+  setFormGroup(contact: Contact){
+    this.form.get('name').setValue(contact?.name);
+    this.form.get('birthDate').setValue(contact?.birthDate);
+    this.form.get('phoneNumber').setValue(contact?.phoneNumber);
+    this.form.get('contactTypeId').setValue(contact?.contactTypeId);
   }
 
 }

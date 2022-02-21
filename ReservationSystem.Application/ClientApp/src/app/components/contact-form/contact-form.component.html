@@ -1,22 +1,25 @@
 
-  <div class="row" [formGroup]="form">
-   <input formControlName="id" type="hidden" name="id" [value]="contact.id" />
+  <div  id="row" [formGroup]="form">
+   <input formControlName="id" type="hidden" [value]="contact?.id" />
+
+   <div id="row1">
    <mat-form-field appearance="outline">
     <mat-icon matSuffix>supervisor_account</mat-icon>
      <mat-label>Name</mat-label>
      <input formControlName="name" matInput placeholder="Contact Name ..." />
      <mat-error>The field contact type is required</mat-error>
    </mat-form-field>
-
    <mat-form-field appearance="outline">
      <mat-icon matSuffix>travel_explore</mat-icon>
      <mat-label>Contact Type</mat-label>
-     <mat-select formControlName="contactTypeId" [(value)]="contact.contactTypeId" >
+     <mat-select formControlName="contactTypeId">
        <mat-option *ngFor="let type of contactTypes" [value]="type.id">{{type.name}}</mat-option>
      </mat-select>
      <mat-error>The field contact type is required</mat-error>
    </mat-form-field>
-   <mat-form-field appearance="outline">
+   </div>
+   <div id="row1">
+    <mat-form-field appearance="outline">
     <mat-icon matSuffix>phone</mat-icon>
      <mat-label>Phone</mat-label>
      <input formControlName="phoneNumber" matInput placeholder="Phone"/>
@@ -30,5 +33,6 @@
      <mat-datepicker #picker></mat-datepicker>
      <mat-error>The field Birth Date is required</mat-error>
    </mat-form-field>
+  </div>
  </div>
 

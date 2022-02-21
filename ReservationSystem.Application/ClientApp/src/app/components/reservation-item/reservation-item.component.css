@@ -8,7 +8,7 @@
 }
 
 tr{
-  display: table-row;
+  display: block;
   vertical-align: inherit;
   border-color: inherit;
 }
@@ -23,6 +23,12 @@ td{
   display: flex;
   justify-content: center;
   width: 120px;
+}
+
+._row{
+  background-color: lightgray;
+  margin: 5px 0 5px 0;
+  display: flex;
 }
 
 

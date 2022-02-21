@@ -19,9 +19,8 @@ body{
   text-align: center;
 }
 
-
-._row{
-  display: block; /*flex*/
+.row{
+  display: flex;
   /*margin: 45px 20 5px 20;*/
   margin: 20px 10px 20px 10px;
   /*margin-top: 10px;
@@ -44,18 +43,12 @@ mat-form-filed{
   background-color: white;
 }
 
-._container{
-  max-width: 45%;
-  margin: auto;
-  background-color: white;
-}
 .container{
   display: flex;
   grid-template-columns: fit-content(300px) 1fr fit-content(300px);
-  max-width: 65%;
+  max-width: 60%;
   margin: auto;
   background-color: white;
-
 }
 
 .content {

@@ -17,7 +17,8 @@ import { ContactFormComponent } from '../contact-form/contact-form.component';
 })
 export class ReservationCreateComponent implements OnInit {
 
-  @ViewChild(ContactFormComponent) contactForm: ContactFormComponent;
+  @ViewChild(ContactFormComponent)
+    contactForm: ContactFormComponent;
 
   @Input() errors: string[] = [];
   formGroup: FormGroup;
@@ -40,19 +41,19 @@ export class ReservationCreateComponent implements OnInit {
     private actRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
     private toastrService: ToastrService) {
+      this.formGroup = this.formBuilder.group({
+        id: [null],
+        description: ['', Validators.required],
+        date: ['', Validators.required],
+        contactId: [null],
+        contact: [null]
+      });
       this.minDate = new Date();
      }
 
   ngOnInit(): void {
-    this.formGroup = this.formBuilder.group({
-      id:[null],
-      description: ['', Validators.required],
-      date: ['', Validators.required],
-      contactId:[null],
-      contact:[null]
-    });
 
-    this.actRoute.params.subscribe(params=>{
+    this.actRoute.params.subscribe(params => {
       this.id = params['id'];
     });
     if(this.id){
@@ -61,52 +62,56 @@ export class ReservationCreateComponent implements OnInit {
         resp=> {
           this.reservation = resp as Reservation
           this.formGroup.patchValue(this.reservation);
+          this.contactForm.setFormGroup(this.reservation?.contact);
+          //this.formGroup.get('description').setValue(this.reservation.description);
           this.contact = resp.contact;
-          console.log(this.formGroup.value);
         }
       );
+    }
+    else{
+      this.toastrService.info("ReservationId is null")
     }
   }
 
   contactChange(contact: Contact){
-    this.toastrService.info(`Contact event id: ${contact.id}\n Contact event name: ${contact.name}\n Contact phone:${contact.name}`);
     if(contact != undefined){
-      this.formGroup.get('contactId').setValue(contact.id);
       this.formGroup.get('contact').setValue(contact);
-      console.log(contact);
-      this.toastrService.success('Event contact updated', 'Reservation register')
     }
   }
 
   //* Reservation Services *//
-  onSubmit(): void{
+  onnSubmit(): void{
     if (!this.formGroup.valid){
       this.toastrService.error('Form not valid');
       return;
     }
-    this.formGroup.get('id') ?
-      this.AddReservations():
-      this.EditReservation();
+    this.toastrService.success(`INTO ONSUBMIT: ${this.id}` );
+    this.id != undefined ? this.AddReservations(): this.EditReservation();
   }
 
   AddReservations(){
-    this.service.postReservation(this.formGroup.value)
+    this.service.postReservation(this.formGroup.value as Reservation)
     .subscribe(
       () => {
         this.resetForm();
-        this.toastrService.success('Added successfully', 'Reservation register')
+        this.toastrService.success('Added successfully', 'Reservation register');
       },
-      err => this.errors= errorsResponseApi(err))
+      err => {
+        console.log(err); //this.errors = errorsResponseApi(err);
+        this.toastrService.error(`Error adding reservation: ${err}`);
+      })
     }
 
   EditReservation(){
-    this.service.putReservation(this.formGroup.value)
+    this.service.putReservation(this.formGroup.value as Reservation)
     .subscribe(
       () => {
-        this.resetForm();
         this.toastrService.success('Updated successfully', 'Reservation updated');
     },
-      err=> this.errors = errorsResponseApi(err))
+      err=> {
+        console.log(err); //this.errors = errorsResponseApi(err);
+        this.toastrService.error(`Error adding reservation: ${err}`);
+    });
   }
 
 
