@@ -24,15 +24,19 @@ export class ContactService {
     return this.http.get<Contact>(`${this.baseUrl}/${id}`);
   }
 
-  postContact(contact: Contact) {
-    return this.http.post(this.baseUrl,contact);
+  getContactByName(name: string): Observable<Contact> {
+    return this.http.get<Contact>(`${this.baseUrl}/contactbyName/${name}`);
+  }
+
+  postContact(contact: Contact): Observable<Contact> {
+    return this.http.post<Contact>(this.baseUrl, contact);
   }
 
   putContact(contact: Contact){
     return this.http.put(`${this.baseUrl}/${contact.id}`,contact);
   }
 
-  delContact(contact: Contact){
+  deleteContact(contact: Contact){
     return this.http.delete(`${this.baseUrl}/${contact.id}`);
   }
 

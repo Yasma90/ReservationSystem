@@ -41,18 +41,18 @@ export class ReservationCreateComponent implements OnInit {
     private actRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
     private toastrService: ToastrService) {
-      this.formGroup = this.formBuilder.group({
-        id: [null],
-        description: ['', Validators.required],
-        date: ['', Validators.required],
-        contactId: [null],
-        contact: [null]
-      });
       this.minDate = new Date();
      }
 
   ngOnInit(): void {
-
+    this.formGroup = this.formBuilder.group({
+      id: [null],
+      description: ['', Validators.required],
+      date: ['', Validators.required],
+      contactId: [null],
+      contact: [null]
+    });
+    //Get Id parameter by the route.
     this.actRoute.params.subscribe(params => {
       this.id = params['id'];
     });
@@ -63,8 +63,6 @@ export class ReservationCreateComponent implements OnInit {
           this.reservation = resp as Reservation
           this.formGroup.patchValue(this.reservation);
           this.contactForm.setFormGroup(this.reservation?.contact);
-          //this.formGroup.get('description').setValue(this.reservation.description);
-          this.contact = resp.contact;
         }
       );
     }
@@ -79,18 +77,57 @@ export class ReservationCreateComponent implements OnInit {
     }
   }
 
-  //* Reservation Services *//
-  onnSubmit(): void{
-    if (!this.formGroup.valid){
+  onSubmit(): void{
+    if (!this.formGroup.valid && !this.contactForm.isValid()){
       this.toastrService.error('Form not valid');
       return;
     }
     this.toastrService.success(`INTO ONSUBMIT: ${this.id}` );
-    this.id != undefined ? this.AddReservations(): this.EditReservation();
+    this.reservation = this.formGroup.value as Reservation;
+    this.contact = this.reservation.contact;
+
+    this.hangleContact();
+    if(this.id != undefined)
+      this.AddReservations()
+    else
+      this.EditReservation();
   }
 
+  hangleContact(){
+    console.log('into handelContact!!');
+    if(this.contact?.id != undefined)
+      this.editContact();
+    else
+      this.addContact();
+  }
+
+  //* Contact Services *//
+
+  addContact(){
+    this.contactService.postContact(this.contact)
+    .subscribe( (resp)=>{
+      this.reservation.contactId = resp.id;
+      this.contact.id = resp.id;
+      this.toastrService.success('Contact added successfully')
+    },
+    err=> console.log(err)
+    );
+  }
+
+  editContact(){
+    this.contactService.putContact(this.contact)
+    .subscribe( ()=>{
+      this.toastrService.success('Contact updated successfully')
+    },
+    err=> console.log(err)
+    );
+  }
+
+
+  //* Reservation Services *//
+
   AddReservations(){
-    this.service.postReservation(this.formGroup.value as Reservation)
+    this.service.postReservation(this.reservation)
     .subscribe(
       () => {
         this.resetForm();
@@ -103,7 +140,7 @@ export class ReservationCreateComponent implements OnInit {
     }
 
   EditReservation(){
-    this.service.putReservation(this.formGroup.value as Reservation)
+    this.service.putReservation(this.reservation)
     .subscribe(
       () => {
         this.toastrService.success('Updated successfully', 'Reservation updated');

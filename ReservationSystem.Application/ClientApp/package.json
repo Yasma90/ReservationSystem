@@ -23,10 +23,13 @@
     "@angular/platform-browser-dynamic": "~13.0.0",
     "@angular/router": "~13.0.0",
     "@syncfusion/ej2-angular-richtexteditor": "^19.4.52",
+    "angular2-uuid": "^1.1.1",
+    "guid-typescript": "^1.0.9",
     "ngx-markdown": "^13.1.0",
     "ngx-toastr": "^14.2.1",
     "rxjs": "~7.4.0",
     "tslib": "^2.3.0",
+    "util": "^0.12.4",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {

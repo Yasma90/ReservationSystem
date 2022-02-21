@@ -1,3 +1,6 @@
+//import { UUID } from "angular2-uuid";
+//import { Guid } from "guid-typescript";
+
 export function errorsResponseApi(respose: any): string[] {
   const result: string[] = []
 
@@ -19,4 +22,10 @@ export function errorsResponseApi(respose: any): string[] {
   }
   return result;
 
+}
+
+
+export function generateGuid(): void {
+   //UUID.UUID();
+  //return Guid.create().toString();
 }

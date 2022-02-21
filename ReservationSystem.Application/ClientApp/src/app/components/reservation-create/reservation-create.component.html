@@ -4,7 +4,7 @@
 <div class="container">
   <app-error-response style="visibility: hidden;" [errors]="errors"></app-error-response>
 
-  <form id="reservation-form" (onSubmit)="onnSubmit()" [formGroup]="formGroup">
+  <form id="reservation-form" (onSubmit)="onSubmit()" [formGroup]="formGroup">
     <app-contact-form ></app-contact-form>
     <input type="hidden" name="id" [value]="id" />
     <mat-form-field appearance="outline">

@@ -45,8 +45,8 @@ namespace ReservationSystem.Application.Controllers
             return contact;
         }
 
-        // GET: api/Contacts/Name
-        [HttpGet("{name}")]
+        // GET: api/Contacts/Name/{name}
+        [HttpGet("ContactbyName/{name}")]
         public async Task<ActionResult<Contact>> GetContactbyName(string name)
         {
             var contact = await _unitOfWork.ContactRepository.GetAsync(x => x.Name == name);

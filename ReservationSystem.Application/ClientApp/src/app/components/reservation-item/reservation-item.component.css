@@ -9,7 +9,7 @@
 
 tr{
   display: block;
-  vertical-align: inherit;
+  /*vertical-align: inherit;*/
   border-color: inherit;
 }
 

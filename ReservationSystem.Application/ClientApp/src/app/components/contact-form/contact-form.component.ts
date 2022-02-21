@@ -50,6 +50,11 @@ export class ContactFormComponent implements OnInit {
       this.setFormGroup(this.contact);
       //this.form.patchValue(this.contact);
     }
+    //this.form.valueChanges
+    //    .subscribe(values => {
+    //      console.log(values);
+    //      this.sendContactForm();
+    //   });
 
   }
 
@@ -78,6 +83,10 @@ export class ContactFormComponent implements OnInit {
     this.form.get('birthDate').setValue(contact?.birthDate);
     this.form.get('phoneNumber').setValue(contact?.phoneNumber);
     this.form.get('contactTypeId').setValue(contact?.contactTypeId);
+  }
+
+  isValid(): boolean{
+    return this.form.valid;
   }
 
 }

@@ -1,9 +1,9 @@
 import { Input } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { ReservationService } from 'src/app/services/reservation.service';
 import { errorsResponseApi } from 'src/app/helpers/utilities/utilities';
 import { Reservation } from 'src/app/models/reservation';
-import { ReservationService } from 'src/app/services/reservation.service';
 
 @Component({
   selector: 'app-reservation-item',
