@@ -1,6 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Contact } from 'src/app/models/contact';
-import { ContactService } from 'src/app/services/contact.service';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-contact-item',
@@ -9,11 +7,9 @@ import { ContactService } from 'src/app/services/contact.service';
 })
 export class ContactItemComponent implements OnInit {
 
-  @Input() contact: Contact;
 
-  constructor(
-    private service: ContactService
-  ) { }
+
+  constructor(){}
 
   ngOnInit(): void {
   }

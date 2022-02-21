@@ -8,13 +8,6 @@ body{
   margin-top: 10x;
 }
 
-*{
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: system-ui;
-}
-
 .banner-content{
   align-items: center;
 }
@@ -26,10 +19,29 @@ body{
   text-align: center;
 }
 
-footer{
+
+._row{
+  display: block; /*flex*/
+  /*margin: 45px 20 5px 20;*/
+  margin: 20px 10px 20px 10px;
+  /*margin-top: 10px;
+  margin-bottom: 20px;*/
+  background-color: lightgray;
+}
+
+mat-form-filed{
   display: flex;
-  position: relative;
-  background-color: rgb(59, 58, 58) ;
+  float: left;
+  width: 60%;
+  min-width: 30px;
+  max-width: 300px;
+}
+.footer{
+  visibility: hidden;
+  clear: both;
+  width: 100%;
+  height: 40px;
+  background-color: white;
 }
 
 ._container{
@@ -38,11 +50,12 @@ footer{
   background-color: white;
 }
 .container{
-  display: block;
+  display: flex;
   grid-template-columns: fit-content(300px) 1fr fit-content(300px);
-  max-width: 50%;
+  max-width: 65%;
   margin: auto;
   background-color: white;
+
 }
 
 .content {
@@ -60,13 +73,42 @@ footer{
   color: #FFFF;
   background-color: darkgray;
   border: 0;
-  padding: 0px 20px;
+  padding: 0px 20px 0px 20px;
   cursor: pointer;
 }
 
-:host {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+.btn.btn-read{
+  background-color: red;
+  float: right;
+}
+
+/*Simple form field*/
+
+
+/* Material Icons */
+
+.mat-icon {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
 }
 

@@ -21,9 +21,7 @@ namespace ReservationSystem.Infrastructure.Extensions
         {
             services.AddDbContext<ReservationSysDbContext>(opt => opt
                 .UseSqlServer(connectionString, sql => sql.MigrationsAssembly(typeof(ReservationSysDbContext)
-                    .GetTypeInfo().Assembly.GetName().Name))
-                .UseLoggerFactory(LoggerFactory.Create(builder => builder.AddConsole()))
-                .EnableSensitiveDataLogging()); 
+                    .GetTypeInfo().Assembly.GetName().Name))); 
             services.AddScoped<IContactTypeRepository, ContactTypeRepository>();
             services.AddScoped<IContactRespository, ContactRespository>();
             services.AddScoped<IReservationRepository, ReservationRepository>();

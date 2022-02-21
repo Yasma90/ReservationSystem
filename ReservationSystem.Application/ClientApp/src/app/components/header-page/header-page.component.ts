@@ -7,9 +7,12 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class HeaderPageComponent implements OnInit {
 
-  @Input() routeUrl: string = '/';
-  @Input() title: string = 'RESERVATION LIST';
-  @Input() action:string = 'CREATE RESERVATION';
+  @Input()
+    routeUrl: string = '/';
+  @Input()
+    title: string = 'Reservations List';
+  @Input()
+    action: string = 'CREATE RESERVATION';
   readonly description : string = `Lorem ipsum dolor sit amet, consectetur adipiscing elit,
   sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`
 

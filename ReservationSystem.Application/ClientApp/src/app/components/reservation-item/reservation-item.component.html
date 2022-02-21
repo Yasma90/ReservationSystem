@@ -1,20 +1,20 @@
 <tr class="row">
   <td>
-    <div mat-card-avatar class="card-image"></div>
+    <div mat-card-avatar class="reservation-image"></div>
   </td>
-  <td >
+  <td>
     <div mat-card-title><span name="name">{{reservation.contact.name}}</span></div>
-    <div mat-card-subtitle><span  name="date">{{reservation.date | date}}</span></div>
+    <div mat-card-subtitle><span name="date">{{reservation.date | date: 'EEEE, MMM d h:mm a' }}</span></div>
   </td>
   <td>
     <div mat-card-title><p>Ranking</p></div>
-    <div mat-card-subtitle><span name="ranking">{{reservation.ranking}}</span></div>
+    <div style="display: none"  mat-card-subtitle><span name="ranking">{{reservation.ranking}}</span></div>
+    <app-ranking-star [currRanking]="reservation.ranking" (setRanking)="updateRanking($event)"></app-ranking-star>
   </td>
   <td>
     <div mat-card-title><p>Add Favorite</p></div>
-    <div mat-card-subtitle><span name="favorite">{{reservation.favorite}}</span></div>
     <button mat-icon-button color="warn" aria-label="" (click)="setFavorite()">
-      <mat-icon>{{reservation.favorite ? 'favorite': 'favorite_border' }}</mat-icon>
+      <mat-icon>{{ reservation.favorite ? 'favorite': 'favorite_border' }}</mat-icon>
     </button>
   </td>
   <td>

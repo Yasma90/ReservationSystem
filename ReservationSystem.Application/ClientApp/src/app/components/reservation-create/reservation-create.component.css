@@ -1,0 +1,16 @@
+#reservation-form{
+  display: flex;
+  flex-direction: column;
+  align-items:flex-start ;
+}
+
+.mat-form-field textarea{
+  width: 3005px;
+  height: 100px;
+}
+
+form{
+  margin: 10px 20px;
+}
+
+

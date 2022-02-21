@@ -1,5 +1,6 @@
 import { Input } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { errorsResponseApi } from 'src/app/helpers/utilities/utilities';
 import { Reservation } from 'src/app/models/reservation';
 import { ReservationService } from 'src/app/services/reservation.service';
@@ -12,15 +13,21 @@ import { ReservationService } from 'src/app/services/reservation.service';
 export class ReservationItemComponent implements OnInit {
 
   //@Input() errors: string[] = [];
-  @Input() reservation: Reservation;
+  @Input()
+    reservation: Reservation;
   isFavorite: boolean;
 
   constructor(
     private service: ReservationService,
-    /*private toastr:ToastrService*/) { }
+    private toastr:ToastrService) { }
 
   ngOnInit(): void {
     this.isFavorite = this.reservation.favorite;
+  }
+
+  updateRanking(ranking: number){
+    this.reservation.ranking = ranking;
+    this.editReservation(this.reservation);
   }
 
   setFavorite(){
@@ -30,7 +37,8 @@ export class ReservationItemComponent implements OnInit {
 
   editReservation(reservation: Reservation){
     this.service.putReservation(reservation)
-    .subscribe(() => {}, err => console.error(err));
+    .subscribe(
+      () => this.toastr.info('Reservation updated successfully', 'Update Reservation' ), err => console.error(err));
   }
 
 }

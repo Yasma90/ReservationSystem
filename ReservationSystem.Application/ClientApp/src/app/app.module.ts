@@ -17,6 +17,8 @@ import { ReservationItemComponent } from './components/reservation-item/reservat
 import { BannerPageComponent } from './components/banner-page/banner-page.component';
 import { ContactFormComponent } from './components/contact-form/contact-form.component';
 import { ToastrModule } from 'ngx-toastr';
+import { TextDescriptionComponent } from './components/text-description/text-description.component';
+import { RankingStarComponent } from './components/ranking-star/ranking-star.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { ToastrModule } from 'ngx-toastr';
     ContactItemComponent,
     ReservationItemComponent,
     BannerPageComponent,
-    ContactFormComponent
+    ContactFormComponent,
+    TextDescriptionComponent,
+    RankingStarComponent
   ],
   imports: [
     BrowserModule,

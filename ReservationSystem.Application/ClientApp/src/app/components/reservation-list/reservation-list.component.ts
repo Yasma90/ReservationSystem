@@ -10,7 +10,7 @@ import { ReservationService } from 'src/app/services/reservation.service';
 export class ReservationListComponent implements OnInit {
   reservations: Reservation[] = [];
   @Input()
-  reservationId: string;
+    reservationId: string;
 
   constructor(
     public service: ReservationService) { }
@@ -24,9 +24,5 @@ export class ReservationListComponent implements OnInit {
     .subscribe( resp => this.reservations = resp);
   }
 
-  delete(reservation: Reservation){
-    this.service.delReservation(reservation)
-    .subscribe(()=>{},err=> console.error(err));
-  }
 
 }

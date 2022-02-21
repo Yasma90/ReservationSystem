@@ -1,11 +1,11 @@
 import { Contact } from "./contact";
 
 export class Reservation {
-  id?:string;
+  id?: string;
   description: string;
-  ranking: number;
-  favorite: boolean;
+  ranking?: number;
+  favorite?: boolean;
+  date: string = Date.now.toString();
   contactId: string;
-  contact: Contact = new Contact();
-  date:string = Date.now.toString();
+  contact?: Contact = new Contact();
 }

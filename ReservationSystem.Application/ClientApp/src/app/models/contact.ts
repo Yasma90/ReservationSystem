@@ -3,8 +3,8 @@ import { ContactType } from "./contact-type";
 export class Contact {
   id?: string;
   name: string;
-  phone: string;
+  phoneNumber: string;
   birthDate: string;
   contactTypeId: string;
-  ContactType: ContactType = new ContactType();
+  contactType?: ContactType = new ContactType();
 }

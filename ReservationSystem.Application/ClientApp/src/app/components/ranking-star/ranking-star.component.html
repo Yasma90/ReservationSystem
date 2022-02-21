@@ -1,1 +1,4 @@
-<p>ranking-star works!</p>
+<mat-icon *ngFor="let i of rankingArray; let indx = index"
+(mouseenter)="mouseEnter(indx)" (mouseleave)="mouseLeave()"
+(click)="ranking(indx)"
+[ngClass]="{ranking : currRanking > indx}">star</mat-icon>

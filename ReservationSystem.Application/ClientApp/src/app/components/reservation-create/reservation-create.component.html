@@ -1,14 +1,27 @@
-<app-header-page title="Create/Edit Reservation" action="RESERVATION LIST"
+<app-header-page title="Create Reservation" action="Reservations List"
   routeUrl="/reservations"></app-header-page>
 
 <div class="container">
-  <app-error-response [errors]="errors"></app-error-response>
+  <app-error-response style="visibility: hidden;" [errors]="errors"></app-error-response>
 
-  <form novalidate #form="ngForm" (ngSubmit)="onSubmit()" [formGroup]="formGroup">
-    <app-contact-form></app-contact-form>
-
-      <button class="btn btn-primary btn-lg btn-block" type="submit"
-      [disabled]="form.invalid">SEND</button>
+  <form id="reservation-form" (submit)="onSubmit()" [formGroup]="formGroup">
+    <app-contact-form [contact]="contact" (contactChange)="contactChange($event)"></app-contact-form>
+    <input type="hidden" name="id" [value]="id" />
+    <mat-form-field appearance="outline">
+      <mat-label>Description</mat-label>
+      <textarea matInput formGroupName="description" ></textarea>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Reservation Date</mat-label>
+      <input formControlName="date" matInput
+        [matDatepicker]="picker" [min]="minDate">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <div class="btn-send">
+      <button class="btn btn-read" type="submit" color="danger"
+      [disabled]="formGroup.invalid">SEND</button>
+    </div>
   </form>
 
 </div>
