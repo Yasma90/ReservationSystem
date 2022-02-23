@@ -1,9 +1,10 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { errorsResponseApi } from 'src/app/helpers/utilities/utilities';
+
 import { Contact } from 'src/app/models/contact';
 import { Reservation } from 'src/app/models/reservation';
 import { ContactService } from 'src/app/services/contact.service';
@@ -22,11 +23,11 @@ export class ReservationCreateComponent implements OnInit {
 
   @Input() errors: string[] = [];
   formGroup: FormGroup;
-  contact: Contact= new Contact();
-  reservation: Reservation=new Reservation();
+
+  reservation: Reservation = new Reservation();
+  contact: Contact = new Contact();
   id?: string;
 
-  cheked: boolean;
   minDate: Date;
   myFilter = (d: Date | null): boolean => {
     const day = (d || new Date()).getDate  //getDay();
@@ -40,9 +41,7 @@ export class ReservationCreateComponent implements OnInit {
     private contactService: ContactService,
     private actRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private toastrService: ToastrService) {
-      this.minDate = new Date();
-     }
+    private toastrService: ToastrService) { }
 
   ngOnInit(): void {
     this.formGroup = this.formBuilder.group({
@@ -52,66 +51,72 @@ export class ReservationCreateComponent implements OnInit {
       contactId: [null],
       contact: [null]
     });
+
     //Get Id parameter by the route.
     this.actRoute.params.subscribe(params => {
       this.id = params['id'];
     });
-    if(this.id){
+    if(this.id) {
       this.service.getReservationById(this.id)
       .subscribe(
         resp=> {
           this.reservation = resp as Reservation
+          this.contact = this.reservation?.contact;
           this.formGroup.patchValue(this.reservation);
-          this.contactForm.setFormGroup(this.reservation?.contact);
+          this.contactForm.setFormGroup(this.contact);
         }
       );
     }
-    else{
-      this.toastrService.info("ReservationId is null")
-    }
-  }
-
-  contactChange(contact: Contact){
-    if(contact != undefined){
-      this.formGroup.get('contact').setValue(contact);
+    else {
+      console.info('Create Reservation');
+      this.minDate = new Date();
     }
   }
 
   onSubmit(): void{
     if (!this.formGroup.valid && !this.contactForm.isValid()){
-      this.toastrService.error('Form not valid');
+      console.log('Form invalid');
       return;
     }
-    this.toastrService.success(`INTO ONSUBMIT: ${this.id}` );
-    this.reservation = this.formGroup.value as Reservation;
-    this.contact = this.reservation.contact;
+    this.reservation.date = this.formGroup.get('date').value;
+    this.reservation.description = this.formGroup.get('description').value;
 
-    this.hangleContact();
+    this.contact.name = this.contactForm.form.get('name').value;
+    this.contact.birthDate = this.contactForm.form.get('birthDate').value;
+    this.contact.phoneNumber = this.contactForm.form.get('phoneNumber').value;
+    this.contact.contactTypeId = this.contactForm.form.get('contactTypeId').value;
+
+    this.handleContact();
     if(this.id != undefined)
-      this.AddReservations()
-    else
       this.EditReservation();
+    else
+      this.AddReservations()
   }
 
-  hangleContact(){
-    console.log('into handelContact!!');
-    if(this.contact?.id != undefined)
-      this.editContact();
-    else
+  handleContact(){
+    this.contact?.id != undefined ?
+      this.editContact():
       this.addContact();
   }
+
 
   //* Contact Services *//
 
   addContact(){
     this.contactService.postContact(this.contact)
-    .subscribe( (resp)=>{
-      this.reservation.contactId = resp.id;
-      this.contact.id = resp.id;
-      this.toastrService.success('Contact added successfully')
-    },
-    err=> console.log(err)
-    );
+    .subscribe(
+      (resp) => {
+        this.contact.id = resp.id;
+        this.reservation.contactId = resp.id;
+        this.reservation.contact = this.contact;
+        this.toastrService.success('Contact added successfully')
+      },
+      err => {
+        console.log(err);
+        this.toastrService.error('Occurred a error', 'Contact');
+        //this.errors = errorsResponseApi(err);
+      }
+      );
   }
 
   editContact(){
@@ -119,14 +124,17 @@ export class ReservationCreateComponent implements OnInit {
     .subscribe( ()=>{
       this.toastrService.success('Contact updated successfully')
     },
-    err=> console.log(err)
+    err=> {
+      console.log(err)
+      this.toastrService.error('Occurred a error', 'Contact')
+    }
     );
   }
 
 
   //* Reservation Services *//
 
-  AddReservations(){
+  AddReservations() {
     this.service.postReservation(this.reservation)
     .subscribe(
       () => {
@@ -134,8 +142,9 @@ export class ReservationCreateComponent implements OnInit {
         this.toastrService.success('Added successfully', 'Reservation register');
       },
       err => {
-        console.log(err); //this.errors = errorsResponseApi(err);
-        this.toastrService.error(`Error adding reservation: ${err}`);
+        console.error(err);
+        this.toastrService.error('Occurred a error', 'Reservation')
+        //this.errors = errorsResponseApi(err);
       })
     }
 
@@ -145,12 +154,12 @@ export class ReservationCreateComponent implements OnInit {
       () => {
         this.toastrService.success('Updated successfully', 'Reservation updated');
     },
-      err=> {
-        console.log(err); //this.errors = errorsResponseApi(err);
-        this.toastrService.error(`Error adding reservation: ${err}`);
+      err => {
+        console.error(err);
+        this.toastrService.error('Occurred a error', 'Reservation')
+        //this.errors = errorsResponseApi(err);
     });
   }
-
 
   resetForm(){
     this.formGroup.reset();

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ReservationSystem.Persistence;
 
 namespace ReservationSystem.Persistence.Migrations
 {
     [DbContext(typeof(ReservationSysDbContext))]
-    partial class ReservationSysDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220223090244_UpdateContactType")]
+    partial class UpdateContactType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

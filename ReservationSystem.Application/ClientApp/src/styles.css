@@ -45,6 +45,9 @@ mat-form-filed{
 
 .container{
   display: flex;
+  /* flex-flow: column */
+  align-items: center;
+  align-content: center;
   grid-template-columns: fit-content(300px) 1fr fit-content(300px);
   max-width: 60%;
   margin: auto;
@@ -75,6 +78,10 @@ mat-form-filed{
   float: right;
 }
 
+.btn:disabled{
+  background-color: gray;
+}
+
 /*Simple form field*/
 
 
@@ -103,5 +110,23 @@ mat-form-filed{
 
   /* Support for IE. */
   font-feature-settings: 'liga';
+}
+
+
+@media (max-width:480px) {
+  .container{
+      max-width: 95%;
+  }
+}
+
+@media all and (max-width: 600px){
+  ._div{
+      display: block !important;  /* Cuando el ancho sea inferior a 600px el elemento será un bloque */
+      width: 100% !important;
+      max-width: 100% !important;
+      margin: auto !important;
+      position: static !important;
+      float: none !important;
+  }
 }
 

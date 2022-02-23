@@ -2,7 +2,7 @@
 
 Reservation System development with ASP .Net 5 Web Application (backend) and Angular 13 (front-end)
 
-To get more details go the API documentation /swagger 
+To get more details or test go the API documentation `/swagger` 
 
 ## Pre-requisites 
             
@@ -25,9 +25,10 @@ To get more details go the API documentation /swagger
 
 ## Setting Api URL into front-end
 
-`---src/enviroments/enviroment|.production|.ts`
+`---ClientApp/src/enviroments/enviroment|.production|.ts`
 `apiUrl: 'https://localhost:5001/api' //'https://localhost:44323/api'`
 
+`dotnet run`
 
 ## Further help
 
@@ -43,4 +44,4 @@ dotnet ef migrations remove --project ReservationSystem.Persistence -s Reservati
 
 ## Project status
 
-* Still UI for Develop
+* Don't search by name contact, sorting, paging, internationalization 

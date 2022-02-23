@@ -24,8 +24,8 @@ export class ReservationService {
     return this.http.get<Reservation>(`${this.baseUrl}/${id}`);
   }
 
-  postReservation(reservation: Reservation) {
-    return this.http.post(this.baseUrl, reservation);
+  postReservation(reservation: Reservation): Observable<Reservation> {
+    return this.http.post<Reservation>(this.baseUrl, reservation);
   }
 
   putReservation(reservation: Reservation){

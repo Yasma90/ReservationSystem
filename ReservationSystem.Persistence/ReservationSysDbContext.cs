@@ -16,21 +16,20 @@ namespace ReservationSystem.Persistence
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            // One to many relationship: Contact => Reservation
-            builder.Entity<Contact>()
-                .HasMany(r => r.Reservations)
-                .WithOne(c => c.Contact)
-                .HasForeignKey(fk => new { fk.ContactId })
-                .HasPrincipalKey(pk=>new {pk.Id})
-                .OnDelete(DeleteBehavior.Cascade);
+            builder.Entity<Reservation>()
+                .HasOne(r => r.Contact)
+                .WithMany()
+                .HasForeignKey(fk => fk.ContactId);
 
-            // One to many relationship: Contactype => Contact
-            builder.Entity<ContactType>()
+            builder.Entity<Contact>()
+                .HasOne(c => c.ContactType)
+                .WithMany()
+                .HasForeignKey(fk => fk.ContactTypeId);
+
+            builder.Entity<ContactType>()             
                 .HasMany(c => c.Contacts)
-                .WithOne(c => c.ContactType)
-                .HasForeignKey(fk => fk.ContactTypeId)
-                .HasPrincipalKey(pk => new { pk.Id })
-                .OnDelete(DeleteBehavior.Cascade);
+                .WithOne()
+                .OnDelete(DeleteBehavior.ClientSetNull);
 
         }
 

@@ -14,7 +14,7 @@ export class ContactService {
   constructor(
     private http: HttpClient) {}
 
-  readonly baseUrl = `${environment.apiUrl}/contacs`;
+  readonly baseUrl = `${environment.apiUrl}/contacts`;
 
   getContacts(): Observable<Contact[]> {
     return this.http.get<Contact[]>(this.baseUrl);

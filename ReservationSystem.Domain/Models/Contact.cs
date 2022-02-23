@@ -23,7 +23,7 @@ namespace ReservationSystem.Domain.Models
         [Required]
         public Guid ContactTypeId { get; set; }        
         public virtual ContactType ContactType { get; set; }
-        public virtual ICollection<Reservation> Reservations { get; set; }
+        //public virtual ICollection<Reservation> Reservations { get; set; }
 
     }
 }

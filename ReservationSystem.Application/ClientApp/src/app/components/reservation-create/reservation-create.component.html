@@ -1,15 +1,15 @@
-<app-header-page title="Create Reservation" action="Reservations List"
+<app-header-page title="Create Reservation" action="RESERVATION LIST"
   routeUrl="/reservations"></app-header-page>
 
 <div class="container">
   <app-error-response style="visibility: hidden;" [errors]="errors"></app-error-response>
 
-  <form id="reservation-form" (onSubmit)="onSubmit()" [formGroup]="formGroup">
-    <app-contact-form ></app-contact-form>
-    <input type="hidden" name="id" [value]="id" />
+  <form id="reservation-form" (ngSubmit)="onSubmit()" [formGroup]="formGroup">
+    <app-contact-form></app-contact-form>
+    <input type="hidden" name="id" [value]="id"/>
     <mat-form-field appearance="outline">
       <mat-label>Description</mat-label>
-      <textarea formGroupName="description" matInput [value]="reservation.description">{{reservation.description}}</textarea>
+      <textarea formControlName="description" matInput ></textarea>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Reservation Date</mat-label>
@@ -19,9 +19,8 @@
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
     <div class="btn-send">
-      <button class="btn btn-read" type="submit" color="danger"
-      [disabled]="formGroup.invalid">SEND</button>
+      <button class="btn btn-read" type="submit"
+      [disabled]="!formGroup.valid">SEND</button>
     </div>
   </form>
-
 </div>

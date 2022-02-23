@@ -1,14 +1,13 @@
 
-<app-header-page title="Reservation List" action="CREATE RESERVATION"
+<app-header-page title="Reservations List" action="CREATE RESERVATION"
   routeUrl="/reservations/create"></app-header-page>
 
 <div class="container">
-    <p *ngIf="!reservations"><em>No reservations yet ...</em></p>
+    <p *ngIf="!reservations"><em>There isn't reservations yet ...</em></p>
 
     <table>
       <app-reservation-item *ngFor="let reservation of reservations"
         [reservation]="reservation"></app-reservation-item>
     </table>
-
 </div>
 

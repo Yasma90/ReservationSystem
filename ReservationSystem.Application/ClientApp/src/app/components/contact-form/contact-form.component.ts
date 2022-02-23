@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { Subject, takeUntil } from 'rxjs';
 import { Contact } from 'src/app/models/contact';
 import { ContactType } from 'src/app/models/contact-type';
 import { ContactTypeService } from 'src/app/services/contact-type.service';
 import { ContactService } from 'src/app/services/contact.service';
-import { ReservationService } from 'src/app/services/reservation.service';
 
 @Component({
   selector: 'app-contact-form',
@@ -17,20 +17,23 @@ export class ContactFormComponent implements OnInit {
   @Output()
     contactChange: EventEmitter<Contact> = new EventEmitter<Contact>();
 
-  form: FormGroup;
-  contact: Contact;
+  public form: FormGroup;
+  contact: Contact= new Contact();
   contactTypes: ContactType[];
   date = new FormControl(new Date());
   maxDate: Date;
+  searchContact: boolean;
+
+  protected ngUnsubscribe: Subject<void> = new Subject<void>();
 
   constructor(
+    private service: ContactService,
     private contactTypeService: ContactTypeService,
     private formBuilder: FormBuilder,
     private toast: ToastrService) {
       this.maxDate = new Date();
   }
 
-    //*OnInit*//
   ngOnInit(): void {
     this.form = this.formBuilder.group({
       id: [''],
@@ -43,18 +46,9 @@ export class ContactFormComponent implements OnInit {
       }]
     });
     this.getContactTypes();
-
-    //if(this.contact?.id)
     if(this.contact?.id){
-      //this.form.reset();
-      this.setFormGroup(this.contact);
-      //this.form.patchValue(this.contact);
+      this.form.patchValue(this.contact);
     }
-    //this.form.valueChanges
-    //    .subscribe(values => {
-    //      console.log(values);
-    //      this.sendContactForm();
-    //   });
 
   }
 
@@ -70,19 +64,50 @@ export class ContactFormComponent implements OnInit {
     .subscribe( resp => this.contactTypes = resp);
   }
 
+  searchByName(){
+    this.searchContact = true;
+    this.ngUnsubscribe.next();
+    this.service.getContactByName(this.form.get('name').value)
+    .pipe(takeUntil(this.ngUnsubscribe))
+    .subscribe(
+      resp => {
+        //if(resp != undefined){
+        const contact = resp as Contact;
+        //this.setAbstractControl(contact);
+        this.setFormGroup(contact);
+        this.ngUnsubscribe.next();
+        this.searchContact = false;
+        //}
+        //else {
+        //  this.contact.id = null;
+        //  this.form.get('id').setValue('');
+        //}
+      },
+      err => {
+        this.ngUnsubscribe.next();
+        this.searchContact = false;
+        //this.form.reset();
+      }
+    );
+
+  }
+
   //**Function Help */
-  parseContact(){
+
+  setFormGroup(contact: Contact){
+    this.form.controls['id'].setValue(contact?.id);
+    this.form.controls['name'].setValue(contact?.name);
+    this.form.controls['birthDate'].setValue(contact?.birthDate);
+    this.form.controls['phoneNumber'].setValue(contact?.phoneNumber);
+    this.form.controls['contactTypeId'].setValue(contact?.contactTypeId);
+  }
+
+  parseContact() {
+    this.contact.id = this.form.contains['id'];
     this.contact.name = this.form.contains['name'];
     this.contact.phoneNumber = this.form.contains['phoneNumber'];
     this.contact.birthDate = this.form.contains['birthDate'];
     this.contact.contactTypeId = this.form.contains['contactTypeId'];
-  }
-
-  setFormGroup(contact: Contact){
-    this.form.get('name').setValue(contact?.name);
-    this.form.get('birthDate').setValue(contact?.birthDate);
-    this.form.get('phoneNumber').setValue(contact?.phoneNumber);
-    this.form.get('contactTypeId').setValue(contact?.contactTypeId);
   }
 
   isValid(): boolean{
