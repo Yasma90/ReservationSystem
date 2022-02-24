@@ -86,56 +86,68 @@ export class ReservationCreateComponent implements OnInit {
     this.contact.phoneNumber = this.contactForm.form.get('phoneNumber').value;
     this.contact.contactTypeId = this.contactForm.form.get('contactTypeId').value;
 
-    this.handleContact();
-    if(this.id != undefined)
-      this.EditReservation();
-    else
-      this.AddReservations()
+    this.handlerContact();
   }
 
-  handleContact(){
+  handlerContact(){
     this.contact?.id != undefined ?
       this.editContact():
       this.addContact();
   }
 
+  handlerReservation(){
+    this.id != undefined ?
+      this.EditReservation():
+      this.AddReservations()
+  }
 
   //* Contact Services *//
 
   addContact(){
-    this.contactService.postContact(this.contact)
+    this.contactService.postContact(this.contact
+      //{ name: this.contact.name,
+      // birthDate : this.contact.birthDate,
+      // phoneNumber: this.contact.phoneNumber,
+      // contactTypeId: this.contact.contactTypeId}
+    )
     .subscribe(
       (resp) => {
         this.contact.id = resp.id;
         this.reservation.contactId = resp.id;
-        this.reservation.contact = this.contact;
+        this.handlerReservation();
         this.toastrService.success('Contact added successfully')
       },
       err => {
         console.log(err);
         this.toastrService.error('Occurred a error', 'Contact');
         //this.errors = errorsResponseApi(err);
-      }
-      );
+      });
   }
 
   editContact(){
     this.contactService.putContact(this.contact)
     .subscribe( ()=>{
+      this.handlerReservation();
       this.toastrService.success('Contact updated successfully')
     },
     err=> {
       console.log(err)
       this.toastrService.error('Occurred a error', 'Contact')
-    }
-    );
+    });
   }
 
 
   //* Reservation Services *//
 
   AddReservations() {
-    this.service.postReservation(this.reservation)
+    this.reservation.contact =null;
+    this.service.postReservation(this.reservation
+    //   {
+    //   date: this.reservation.date,
+    //   description: this.reservation.description,
+    //   contactId: this.reservation.contactId
+    // }
+    )
     .subscribe(
       () => {
         this.resetForm();

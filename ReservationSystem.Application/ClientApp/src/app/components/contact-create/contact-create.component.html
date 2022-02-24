@@ -1,7 +1,7 @@
 <form [formGroup]="form">
   <mat-form-field appearence="outline">
     <mat-label>Name</mat-label>
-    <input formControlName="name" matInput/>
+    <input formControlName="name" matInput (keypress)="searchByName()"/>
     <mat-error></mat-error>
   </mat-form-field>
   <mat-form-field appearence="full">

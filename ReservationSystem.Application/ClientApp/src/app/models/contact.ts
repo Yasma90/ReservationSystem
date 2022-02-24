@@ -6,5 +6,5 @@ export class Contact {
   phoneNumber: string;
   birthDate: string;
   contactTypeId: string;
-  contactType?: ContactType = new ContactType();
+  contactType?: ContactType;
 }

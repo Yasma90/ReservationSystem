@@ -29,6 +29,10 @@ export class ContactCreateComponent implements OnInit {
     });
   }
 
+
+
+  //*Services*/
+
   getContactTypes(){
     this.ContactTypeservice.getContactTypes()
     .subscribe(resp=> this.types = resp,
@@ -43,6 +47,19 @@ export class ContactCreateComponent implements OnInit {
   updateReservation(contact: Contact){
     this.service.putContact(contact)
     .subscribe(()=>{},err=> console.error(err));
+  }
+
+  searchByName(){
+    this.service.getContactByName(this.form.get('name').value)
+    .subscribe(
+      resp => {
+        this.form.get('id').setValue(resp.birthDate);
+        this.form.get('name').setValue(resp.name);
+        this.form.get('birthDate').setValue(resp.birthDate);
+        this.form.get('phoneNumber').setValue(resp.phoneNumber);
+        this.form.get('contactTypeId').setValue(resp.contactTypeId);
+      }
+    )
   }
 
 }

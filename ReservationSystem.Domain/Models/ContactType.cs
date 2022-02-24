@@ -11,9 +11,8 @@ namespace ReservationSystem.Domain.Models
     //[Index(nameof(Name), IsUnique = true)]
     public class ContactType
     {
-        [Key]
         public Guid Id { get; set; }
-        //[Required]
+        [Required]
         public string Name { get; set; }
         public virtual ICollection<Contact> Contacts { get; set; }
     }

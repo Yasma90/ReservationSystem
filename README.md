@@ -44,4 +44,4 @@ dotnet ef migrations remove --project ReservationSystem.Persistence -s Reservati
 
 ## Project status
 
-* Don't search by name contact, sorting, paging, internationalization 
+* UI Don't search by name contact, sorting, paging, internationalization 

@@ -12,7 +12,6 @@ namespace ReservationSystem.Domain.Models
     [Index(nameof(Date), nameof(Ranking))]
     public class Reservation
     {
-        [Key]
         public Guid Id { get; set; }
         public DateTime Date { get; set; } = DateTime.Now;
         public int Ranking { get; set; }

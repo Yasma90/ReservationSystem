@@ -7,5 +7,5 @@ export class Reservation {
   favorite?: boolean;
   date: string = Date.now.toString();
   contactId: string;
-  contact?: Contact = new Contact();
+  contact?: Contact;
 }

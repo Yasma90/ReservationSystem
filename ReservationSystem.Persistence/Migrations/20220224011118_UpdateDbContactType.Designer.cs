@@ -10,8 +10,8 @@ using ReservationSystem.Persistence;
 namespace ReservationSystem.Persistence.Migrations
 {
     [DbContext(typeof(ReservationSysDbContext))]
-    [Migration("20220223090244_UpdateContactType")]
-    partial class UpdateContactType
+    [Migration("20220224011118_UpdateDbContactType")]
+    partial class UpdateDbContactType
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -62,6 +62,7 @@ namespace ReservationSystem.Persistence.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -76,6 +77,9 @@ namespace ReservationSystem.Persistence.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("ContactId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("ContactId1")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("Date")
@@ -93,6 +97,8 @@ namespace ReservationSystem.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ContactId");
+
+                    b.HasIndex("ContactId1");
 
                     b.HasIndex("Date", "Ranking");
 
@@ -122,7 +128,16 @@ namespace ReservationSystem.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("ReservationSystem.Domain.Models.Contact", null)
+                        .WithMany("Reservations")
+                        .HasForeignKey("ContactId1");
+
                     b.Navigation("Contact");
+                });
+
+            modelBuilder.Entity("ReservationSystem.Domain.Models.Contact", b =>
+                {
+                    b.Navigation("Reservations");
                 });
 
             modelBuilder.Entity("ReservationSystem.Domain.Models.ContactType", b =>

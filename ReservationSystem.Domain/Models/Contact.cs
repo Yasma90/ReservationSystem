@@ -12,7 +12,6 @@ namespace ReservationSystem.Domain.Models
     [Index(nameof(Name), nameof(BirthDate), IsUnique =true)]
     public class Contact
     {
-        [Key]
         public Guid Id { get; set; }
         [Required]
         public string Name { get; set; }
@@ -23,7 +22,7 @@ namespace ReservationSystem.Domain.Models
         [Required]
         public Guid ContactTypeId { get; set; }        
         public virtual ContactType ContactType { get; set; }
-        //public virtual ICollection<Reservation> Reservations { get; set; }
+        public virtual ICollection<Reservation> Reservations { get; set; }
 
     }
 }
